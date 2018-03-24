@@ -48,4 +48,11 @@ class Category extends \yii\db\ActiveRecord {
             ->orderBy('name ASC')
             ->all();
     }
+    
+    /**
+     * Getter for category detail page URL.
+     */
+    public function getUrl() {
+        return \yii\helpers\Url::to(['category/view', 'id' => $this->id]);
+    }
 }

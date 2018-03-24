@@ -33,11 +33,14 @@ class ProductController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::getFilterQuery(Yii::$app->getRequest()->get()),
+            'query' => Product::getFilterQuery(Yii::$app->getRequest()->get())
+                ->with('category')->with('type'),
             'pagination' => new \yii\data\Pagination([
-                'pageSize' => 2
-            ])
+                'pageSize' => 10
+            ]),
+            'sort' => ['attributes' => ['name', 'id']]
         ]);
 
         return $this->render('index', [
@@ -109,7 +112,7 @@ class ProductController extends Controller {
     public function actionDelete($id) {
         $model = $this->findModel($id);
         if ($model->getImagePath() && file_exists($model->getImagePath()))
-            unlink ($model->getImagePath());
+            unlink($model->getImagePath());
         $model->delete();
         return $this->redirect(['index']);
     }

@@ -48,4 +48,11 @@ class ProductType extends \yii\db\ActiveRecord {
             ->orderBy('name ASC')
             ->all();
     }
+    
+    /**
+     * Getter for product type detail page URL.
+     */
+    public function getUrl() {
+        return \yii\helpers\Url::to(['product-type/view', 'id' => $this->id]);
+    }
 }

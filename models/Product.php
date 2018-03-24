@@ -64,6 +64,22 @@ class Product extends \yii\db\ActiveRecord {
     }
     
     /**
+     * Getter for categories relation.
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory() {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+    
+    /**
+     * Getter for product type relation.
+     * @return \yii\db\ActiveQuery
+     */
+    public function getType() {
+        return $this->hasOne(ProductType::class, ['id' => 'product_type_id']);
+    }
+    
+    /**
      * Easy file saver.
      * @return boolean
      */
@@ -105,6 +121,23 @@ class Product extends \yii\db\ActiveRecord {
         return \yii\helpers\Url::to(['product/view', 'id' => $this->id]);
     }
     
+    /**
+     * Getter for description truncated.
+     * @param int $truncate Set zero to skip truncating.
+     * @return string
+     */
+    public function getDescription(int $truncate = 0) {
+        return $truncate < 1
+            ? $this->description
+            : \yii\helpers\StringHelper::truncate($this->description, $truncate, '...');
+    }
+
+
+    /**
+     * Method to generate search query from given parameters.
+     * @param array $get
+     * @return \yii\db\ActiveQuery
+     */
     public static function getFilterQuery(array $get = NULL) {
         
         $get = !empty($get) ? $get : [];

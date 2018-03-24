@@ -39,12 +39,31 @@ $this->params['breadcrumbs'][] = $this->title;
                             if (empty($url))
                                 return '';
                             return Html::img($url, [
-                                        'class' => 'img-thumbnail'
+                                'class' => 'img-thumbnail'
                             ]);
                         },
                     ],
-                    'product_type_id',
-                    'category_id',
+
+                    [
+                        'attribute' => 'category_id',
+                        'format' => 'html',
+                        'value' => function($data) {
+                            if (empty($data->category))
+                                return '';
+                            return Html::a($data->category->name, $data->category->getUrl());
+                        }
+                    ],
+                            
+                    [
+                        'attribute' => 'product_type_id',
+                        'format' => 'html',
+                        'value' => function($data) {
+                            if (empty($data->type))
+                                return '';
+                            return Html::a($data->type->name, $data->type->getUrl());
+                        }
+                    ],
+                                
                     [
                         'attribute' => 'name',
                         'format' => 'html',
@@ -52,7 +71,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a($data->name, $data->getUrl());
                         }
                     ],
-                    'description:ntext',
+                    [
+                        'attribute' => 'description:ntext',
+                        'format' => 'html',
+                        'value' => function($data) {
+                            return Html::tag('span', $data->getDescription(100));
+                        }
+                    ],
+
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
                 'options' => [
