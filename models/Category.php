@@ -39,4 +39,13 @@ class Category extends \yii\db\ActiveRecord {
         ];
     }
 
+    /**
+     * Getter for all the product categories ASC sorted.
+     * @return app\models\Category[]
+     */
+    public function getCategories() {
+        return self::find()
+            ->orderBy('name ASC')
+            ->all();
+    }
 }

@@ -39,4 +39,13 @@ class ProductType extends \yii\db\ActiveRecord {
         ];
     }
 
+    /**
+     * Getter for all the product types ASC sorted.
+     * @return \app\models\ProductType[]
+     */
+    public function getProductTypes() {
+        return self::find()
+            ->orderBy('name ASC')
+            ->all();
+    }
 }
