@@ -25,11 +25,32 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            
+            [
+                'attribute' => 'image',
+                'format' => 'html',    
+                'value' => function ($data) {
+                    $url = $data->getImageUrl();
+                    if (empty($url))
+                        return '';
+                    return Html::img($url, [
+                        'class' => 'img-thumbnail'
+                    ]);
+                },
+            ],
+            
             'product_type_id',
             'category_id',
-            'name',
+                        
+            [
+                'attribute' => 'name',
+                'format' => 'html',
+                'value' => function($data) {
+                    return Html::a($data->name, $data->getUrl());
+                }
+            ],
+                        
             'description:ntext',
-            //'image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

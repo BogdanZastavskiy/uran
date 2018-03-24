@@ -33,7 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'category_id',
             'name',
             'description:ntext',
-            'image',
+            [
+                'attribute' => 'image',
+                'format' => 'html',
+                'value' => function ($data) {
+                    $url = $data->getImageUrl();
+                    if (empty($url))
+                        return '';
+                    return Html::img($url, [
+                        'class' => 'img-fluid img-responsive'
+                    ]);
+                }
+            ],
         ],
     ]) ?>
 

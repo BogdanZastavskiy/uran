@@ -12,7 +12,10 @@ use kartik\select2\Select2;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => [
+        'enctype' => 'multipart/form-data',
+        'method' => 'POST'
+    ]]); ?>
 
     <?php
     
@@ -48,8 +51,23 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?php
+        print $form->field($model, 'uploadedFile')->fileInput();
+    ?>
 
+    <?php if($model->getImageUrl()): ?>
+        <div class="form-group">
+            <?php
+            
+                    var_dump($model->getImagePath());
+            
+            print Html::img($model->getImageUrl(), [
+                'class' => 'img-responsive img-rounded'
+            ]);
+            ?>
+        </div>
+    <?php endif; ?>
+    
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
