@@ -34,7 +34,10 @@ class ProductController extends Controller {
      */
     public function actionIndex() {
         $dataProvider = new ActiveDataProvider([
-            'query' => Product::find(),
+            'query' => Product::getFilterQuery(Yii::$app->getRequest()->get()),
+            'pagination' => new \yii\data\Pagination([
+                'pageSize' => 2
+            ])
         ]);
 
         return $this->render('index', [

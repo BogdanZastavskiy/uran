@@ -104,4 +104,30 @@ class Product extends \yii\db\ActiveRecord {
     public function getUrl() {
         return \yii\helpers\Url::to(['product/view', 'id' => $this->id]);
     }
+    
+    public static function getFilterQuery(array $get = NULL) {
+        
+        $get = !empty($get) ? $get : [];
+        $que = self::find();
+        
+        if (isset($get['product_type_id']) && !empty($get['product_type_id'])) {
+            $que->andFilterWhere([
+                'product_type_id' => $get['product_type_id']
+            ]);
+        }
+        
+        if (isset($get['category_id']) && !empty($get['category_id'])) {
+            $que->andFilterWhere([
+                'category_id' => $get['category_id']
+            ]);
+        }
+        
+        if (isset($get['name']) && !empty($get['name'])) {
+            $que->andFilterWhere([
+                'LIKE', 'name', $get['name'] . '%', false
+            ]);
+        }
+        
+        return $que;
+    }
 }
