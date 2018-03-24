@@ -38,8 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             $url = $data->getImageUrl();
                             if (empty($url))
                                 return '';
-                            return Html::img($url, [
+                            $img = Html::img($url, [
                                 'class' => 'img-thumbnail'
+                            ]);
+                            return Html::a($img, $data->getImageDownloadUrl(), [
+                                'title' => 'Click to download'
                             ]);
                         },
                     ],

@@ -115,6 +115,14 @@ class Product extends \yii\db\ActiveRecord {
     }
     
     /**
+     * Image download URL getter.
+     * @return string
+     */
+    public function getImageDownloadUrl() {
+        return \yii\helpers\Url::to(['product/download', 'id' => $this->id]);
+    }
+    
+    /**
      * Getter for product's detail page URL.
      */
     public function getUrl() {

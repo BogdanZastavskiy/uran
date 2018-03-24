@@ -118,6 +118,19 @@ class ProductController extends Controller {
     }
 
     /**
+     * Download file for existing Product model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDownload($id) {
+        $model = $this->findModel($id);
+        if ($model->getImagePath() && file_exists($model->getImagePath()))
+            return Yii::$app->response->sendFile($model->getImagePath());
+        throw new NotFoundHttpException(Yii::t('app', 'The requested file does not exist.'));
+    }
+
+    /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
