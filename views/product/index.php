@@ -31,6 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     'id',
+                    
+                    [
+                        'attribute' => 'name',
+                        'format' => 'html',
+                        'value' => function($data) {
+                            return Html::a(Html::tag('h3', $data->name), $data->getUrl());
+                        }
+                    ],
+                    
                     [
                         'attribute' => 'image',
                         'format' => 'html',
@@ -66,16 +75,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a($data->type->name, $data->type->getUrl());
                         }
                     ],
-                                
+
                     [
-                        'attribute' => 'name',
-                        'format' => 'html',
-                        'value' => function($data) {
-                            return Html::a($data->name, $data->getUrl());
-                        }
-                    ],
-                    [
-                        'attribute' => 'description:ntext',
+                        'attribute' => 'description',
                         'format' => 'html',
                         'value' => function($data) {
                             return Html::tag('span', $data->getDescription(100));

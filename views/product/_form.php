@@ -58,9 +58,6 @@ use kartik\select2\Select2;
     <?php if($model->getImageUrl()): ?>
         <div class="form-group">
             <?php
-            
-                    var_dump($model->getImagePath());
-            
             print Html::img($model->getImageUrl(), [
                 'class' => 'img-responsive img-rounded'
             ]);
