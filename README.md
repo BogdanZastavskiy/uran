@@ -22,3 +22,21 @@ Run the Yii2 migrations like:
 
 ### That's all
 Should be working
+
+# What is done by task given?
+1. Installed WAPM server (Win7).
+2. Installed and configured GIT.
+3. Installed and configured composer.
+4. Created empty Yii2 Basic via composer.
+5. Implemented the CRUD functionalty for products, categories and product types using Yii2 models.
+6. Implemented the functionality to add image to any product.
+7. Implemented the functionality to download the image (from products list page).
+8. Added primitive filter for products usin jQuery + select2.
+9. Added widget to show random products with "Refresh" button using Ajax + Knockout.js + jQuery + Bootstrap CSS.
+
+# Not done :-(
+1. Thumbnails for images.
+2. Good CSS-styling.
+3. Footer.
+4. Support of URL-manager at client-side.
+5. A lot of other things.
