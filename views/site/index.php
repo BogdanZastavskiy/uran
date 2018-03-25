@@ -13,6 +13,13 @@ $this->title = 'My Yii Application';
             <?= Html::a(Yii::t('app', 'Product Types'), Url::to(['product-type/index']), ['class' => 'btn btn-success']) ?>
             <?= Html::a(Yii::t('app', 'Categories'), Url::to(['category/index']), ['class' => 'btn btn-success']) ?>
         </p>
+        <p>
+            <?php
+            echo app\widgets\MyWidget::widget([
+                'a' => 'b'
+            ]);
+            ?>
+        </p>
     </div>
 
     <div class="body-content">

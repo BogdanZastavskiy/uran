@@ -7,6 +7,7 @@ use app\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -130,6 +131,23 @@ class ProductController extends Controller {
         throw new NotFoundHttpException(Yii::t('app', 'The requested file does not exist.'));
     }
 
+    /**
+     * Action to load products via AJAX for MyWidget.
+     * @throws ForbiddenHttpException
+     */
+    public function actionMywidget() {
+        if (!Yii::$app->getRequest()->getIsAjax())
+            throw new ForbiddenHttpException(Yii::t('app', 'Access denied!'));
+        $prods = Product::getProductsWithImage(6, false, true);
+        foreach ($prods AS &$prod) {
+            //Truncate description for all the products
+            $prod->description = $prod->getDescription(50);
+        }
+        echo \yii\helpers\Json::encode([
+            'products' => $prods
+        ]);
+    }
+    
     /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

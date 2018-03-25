@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "product".
@@ -169,6 +170,33 @@ class Product extends \yii\db\ActiveRecord {
             ]);
         }
         
+        if (isset($get['image']) && !empty($get['image'])) {
+            $que->andWhere(['<>', 'image', '']);
+        }
+        
         return $que;
+    }
+    
+    /**
+     * getter for the products with image uploaded.
+     * @param int $limit
+     * @param bool $asArray
+     * @param bool $random
+     * @return Product[]|[]
+     */
+    public static function getProductsWithImage(int $limit = 0, bool $asArray = false, bool $random = false) {
+        
+        $query = self::getFilterQuery([
+            'image' => true
+        ])
+            ->limit($limit)
+            ->asArray($asArray)
+            ->with('category')
+            ->with('type');
+        
+        if ($random)
+            $query->orderBy(new Expression('rand()'));
+
+        return $query->all();
     }
 }

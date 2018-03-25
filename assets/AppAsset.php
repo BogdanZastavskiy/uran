@@ -23,7 +23,9 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/knockout-3.4.2'
     ];
+    //public $jsOptions = ['position' => \yii\web\View::POS_BEGIN];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
