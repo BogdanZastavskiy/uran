@@ -41,8 +41,7 @@ Should be working
 4. Support of URL-manager at client-side.
 5. A lot of other things.
 
-# Server soft
-1. OS Windows 7 Professional.
-2. MySQL Community Server 5.7.14.
-3. Apache/2.4.23 (Win64) PHP/7.0.10.
+# Server soft used to complete the task
+1. MySQL Community Server 5.7.14.
+2. Apache/2.4.23 (Win64) PHP/7.0.10.
 
